@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { catchExceptions } from '../../middleware/exceptions';
 import UsersService from './users.service';
 import User from './users.model';
+import omit from 'lodash/omit';
 
 export default class UsersController {
 
@@ -74,7 +75,7 @@ export default class UsersController {
 
         const user = new User(req.body);
         const savedUser = await UsersService.saveUser(user);
-        res.status(200).json(savedUser);
+        res.status(200).json(omit(savedUser.toObject(), 'password'));
       })
     )
   }
