@@ -1,0 +1,2 @@
+# Betting
+Simple betting service
