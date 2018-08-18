@@ -17,6 +17,7 @@ export function wds (app) {
   const compiler = webpack(webpackConfig);
 
   app.use(webpackDevMiddleware(compiler));
+  app.set('env', env);
 }
 
 export default wds;
