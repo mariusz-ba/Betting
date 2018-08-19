@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './button.scss';
 
 export default class Button extends Component {
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+    primary: PropTypes.bool,
+    danger: PropTypes.bool
+  }
+  
   render() {
     const classNames = classnames(styles.button, {
       [styles['button--primary']]: this.props.primary,
@@ -10,7 +17,7 @@ export default class Button extends Component {
     })
 
     return (
-      <button className={classNames} {...this.props}>{this.props.children}</button>
+      <button className={classNames} onClick={this.props.onClick}>{this.props.children}</button>
     )
   }
 }
