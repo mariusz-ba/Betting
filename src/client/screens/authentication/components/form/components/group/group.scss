@@ -30,6 +30,7 @@
 
   &__error {
     display: none;
+    margin-top: var(--offset-small);
     font-size: var(--font-size-xsmall);
     font-weight: var(--font-weight-bold);
     color: var(--color-danger);
