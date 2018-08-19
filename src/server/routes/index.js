@@ -1,10 +1,12 @@
 // Controllers
+import { AuthController } from './auth';
 import { UsersController } from './users';
 
 export default class Router {
 
   constructor() {
     this.controllers = [
+      new AuthController('/api/auth'),
       new UsersController('/api/users')
       // ... other controllers
     ]
