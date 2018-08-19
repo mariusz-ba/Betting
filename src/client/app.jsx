@@ -9,6 +9,8 @@ import Home from './screens/home/home';
 import SignIn from './screens/authentication/screens/signin/signin';
 import SignUp from './screens/authentication/screens/signup/signup';
 
+import './app.scss';
+
 export default () => {
   return (
     <Router>
