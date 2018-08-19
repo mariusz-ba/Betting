@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signin } from '@services/session/session.actions';
 import axios from 'axios';
 import styles from '../../authentication.scss';
 
@@ -6,7 +9,7 @@ import Button from '@components/button/button';
 import Card from '../../components/card/card';
 import Form from '../../components/form/form';
 
-export default class SignUp extends Component {
+export class SignUp extends Component {
   state = {
     username: '',
     password: '',
@@ -37,8 +40,12 @@ export default class SignUp extends Component {
         email: this.state.email
       })
       // No errors means user has been created
-      // sign in and redirect
-      console.log('Successfully created new user');
+      await this.props.signin({
+        identifier: this.state.username,
+        password: this.state.password
+      })
+      
+      this.props.history.push('/');
     } catch(error) {
       this.setState({ errors: error.response.data.fields })
     }
@@ -82,3 +89,5 @@ export default class SignUp extends Component {
     )
   }
 }
+
+export default withRouter(connect(null, { signin })(SignUp));
