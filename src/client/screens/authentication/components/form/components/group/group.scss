@@ -1,0 +1,37 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--offset-medium);
+
+  label {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--offset-small);
+    color: var(--color-gray-7);
+  }
+
+  input {
+    outline: 0;
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    padding: var(--offset-small);
+    border: 1px solid var(--color-gray-3);
+  }
+
+  &--error {
+    input {
+      box-shadow: 0 0 1px 1px var(--color-danger);
+    }
+
+    .group__error {
+      display: block;
+    }
+  }
+
+  &__error {
+    display: none;
+    font-size: var(--font-size-xsmall);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-danger);
+  }
+}
