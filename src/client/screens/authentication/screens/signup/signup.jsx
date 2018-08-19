@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styles from '../../authentication.scss';
+
+import Button from '@components/button/button';
+import Card from '../../components/card/card';
+import Form from '../../components/form/form';
 
 export default class SignUp extends Component {
   state = {
@@ -48,38 +53,31 @@ export default class SignUp extends Component {
     const { errors } = this.state;
 
     return (
-      <div>
-        <form>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" name="username" value={username} onChange={this.handleChange}/>
-            { errors.username &&
-              <p>{errors.username}</p>
-            }
-          </div>
-          <div>
-            <label htmlFor="email">E-Mail</label>
-            <input id="email" type="email" name="email" value={email} onChange={this.handleChange}/>
-            { errors.email &&
-              <p>{errors.email}</p>
-            }
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input id="password" type="password" name="password" value={password} onChange={this.handleChange}/>
-            { errors.password &&
-              <p>{errors.password}</p>
-            }
-          </div>
-          <div>
-            <label htmlFor="confirm">Confirm password</label>
-            <input id="confirm" type="password" name="confirm" value={confirm} onChange={this.handleChange}/>
-            { errors.confirm &&
-              <p>{errors.confirm}</p>
-            }
-          </div>
-          <button type="submit" onClick={this.submit}>Sign up</button>
-        </form>
+      <div className={styles.container}>
+        <Card>
+          <Card.Header>Sign up</Card.Header>
+          <Card.Content>
+            <Form>
+              <Form.Group error={errors.username}>
+                <label htmlFor="username">Username</label>
+                <input id="username" type="text" name="username" value={username} onChange={this.handleChange}/>
+              </Form.Group>
+              <Form.Group error={errors.email}>
+                <label htmlFor="email">E-Mail</label>
+                <input id="email" type="email" name="email" value={email} onChange={this.handleChange}/>
+              </Form.Group>
+              <Form.Group error={errors.password}>
+                <label htmlFor="password">Password</label>
+                <input id="password" type="password" name="password" value={password} onChange={this.handleChange}/>
+              </Form.Group>
+              <Form.Group error={errors.confirm}>
+                <label htmlFor="confirm">Confirm password</label>
+                <input id="confirm" type="password" name="confirm" value={confirm} onChange={this.handleChange}/>
+              </Form.Group>
+              <Button primary onClick={this.submit}>Sign up</Button>
+            </Form>
+          </Card.Content>
+        </Card>
       </div>
     )
   }
