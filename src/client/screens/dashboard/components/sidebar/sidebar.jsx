@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './sidebar.scss';
 
+import Menu from './components/menu/menu';
+
 export default class Sidebar extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired
@@ -19,7 +21,31 @@ export default class Sidebar extends Component {
 
     return (
       <div className={classNames}>
-        Menu Here
+        <Menu>
+          <Menu.Item 
+            to="/"
+            icon="far fa-calendar-alt" 
+            text="Events" />
+          <Menu.Item 
+            to="/bets"
+            icon="fas fa-dice" 
+            text="My Bets" />
+          <Menu.Item 
+            to="/manage"
+            icon="fas fa-user" 
+            text="My Events" />
+        </Menu>
+        <span className={styles.divider}></span>
+        <Menu>
+          <Menu.Item 
+            to="/wallet"
+            icon="fas fa-wallet" 
+            text="Wallet" />
+          <Menu.Item 
+            to="/settings"
+            icon="fas fa-cogs" 
+            text="Settings" />
+        </Menu>
       </div>
     )
   }
