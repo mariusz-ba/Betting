@@ -8,20 +8,15 @@
   position: relative;
 }
 
-.navbar {
-  grid-area: navbar;
-  background: var(--color-gray-6);
-}
-
 .wrapper {
   grid-area: wrapper;
   background: var(--color-gray-0);
   display: flex;
+  overflow-y: auto;
 }
 
 .content {
   flex: 1;
-  width: 83.3333%;
-  max-width: 1440px;
-  margin: 0 auto;
+  padding: var(--offset-medium);
+  overflow-y: auto;
 }

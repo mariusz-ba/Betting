@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styles from './dashboard.scss';
 
-import Games from './screens/games/games';
-import Overview from './screens/overview/overview';
+import Events from './screens/events/events';
+import Bets from './screens/bets/bets';
+import Manage from './screens/manage/manage';
 import Settings from './screens/settings/settings';
+import Wallet from './screens/wallet/wallet';
 
+import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
 
 export default class Dashboard extends Component {
@@ -20,13 +23,15 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.navbar}> <button onClick={this.toggle}>Toggle</button></div>
+        <Navbar onMenuToggle={this.toggle}/>
         <div className={styles.wrapper}>
           <Sidebar open={this.state.sidebarOpen}/>
           <div className={styles.content}>
             <Switch>
-              <Route exact path="/" component={Overview}/>
-              <Route path="/games" component={Games}/>
+              <Route exact path="/" component={Events}/>
+              <Route path="/bets" component={Bets}/>
+              <Route path="/manage" component={Manage}/>
+              <Route path="/wallet" component={Wallet}/>
               <Route path="/settings" component={Settings}/>
             </Switch>
           </div>
