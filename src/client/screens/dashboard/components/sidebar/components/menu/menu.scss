@@ -1,0 +1,21 @@
+.menu {
+  list-style-type: none;
+}
+
+.item {
+  a {
+    text-decoration: none;
+    color: var(--color-black);
+    padding: var(--offset-medium);
+    display: grid;
+    grid-template-columns: var(--font-size-medium) auto;
+    grid-gap: var(--offset-medium);
+  
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      background: var(--color-gray-1);
+    }
+  }
+}

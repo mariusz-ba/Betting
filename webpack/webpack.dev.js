@@ -8,7 +8,7 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.scss$/,
-        exclude: /..\/node_modules/,
+        exclude: /\.\.\/node_modules/,
         loaders: [
           'style-loader?sourceMap',
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',

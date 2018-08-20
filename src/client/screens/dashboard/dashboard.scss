@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "navbar"
+                       "wrapper";
+  grid-template-rows: 48px auto;
+  position: relative;
+}
+
+.wrapper {
+  grid-area: wrapper;
+  background: var(--color-gray-0);
+  display: flex;
+  overflow-y: auto;
+}
+
+.content {
+  flex: 1;
+  padding: var(--offset-medium);
+  overflow-y: auto;
+}
