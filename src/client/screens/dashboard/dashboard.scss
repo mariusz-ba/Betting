@@ -1,0 +1,27 @@
+.container {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "navbar"
+                       "wrapper";
+  grid-template-rows: 48px auto;
+  position: relative;
+}
+
+.navbar {
+  grid-area: navbar;
+  background: var(--color-gray-6);
+}
+
+.wrapper {
+  grid-area: wrapper;
+  background: var(--color-gray-0);
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  width: 83.3333%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
