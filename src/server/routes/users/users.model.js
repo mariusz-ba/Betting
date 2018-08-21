@@ -9,7 +9,8 @@ const User = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, index: { unique: true }},
   createdAt: { type: String, default: Date.now },
-  updatedAt: { type: String, default: Date.now }
+  updatedAt: { type: String, default: Date.now },
+  wallet: { type: Number, required: true, default: 100 }
 })
 
 // Hash password before save
