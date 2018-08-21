@@ -18,6 +18,27 @@ class UsersService {
     return user;
   }
 
+  async getWallet(userId) {
+    const user = await this.getUserById(userId);
+    return user.wallet;
+  }
+
+  async reduceWallet(userId, amount) {
+    return this.User.findOneAndUpdate(
+      { _id: userId },
+      { $inc: { wallet: -amount } },
+      { new: true }
+    )
+  }
+
+  async increaseWallet(userId, amount) {
+    return this.User.findOneAndUpdate(
+      { _id: userId },
+      { $inc: { wallet: amount } },
+      { new: true }
+    )
+  }
+
   // Returns true if username is available
   async isUsernameAvailable(username) {
     const users = await this.User.find({ username });
