@@ -1,0 +1,10 @@
+.option {
+  max-width: 400px;
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-gap: var(--offset-medium);
+
+  &:not(:last-of-type) {
+    margin-bottom: var(--offset-small);
+  }
+}
