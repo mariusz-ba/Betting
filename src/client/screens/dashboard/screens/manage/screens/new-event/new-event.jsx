@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Option from './components/option/option';
-import Button from '@components/Button/Button';
+import Button from '@components/button/button';
 import styles from './new-event.scss';
 
 import axios from 'axios';
