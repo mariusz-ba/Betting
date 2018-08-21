@@ -12,7 +12,7 @@ const Event = new Schema({
   }],
   result: {
     finished: { type: Boolean, default: false },
-    option: { type: Schema.Types.ObjectId, required: true }
+    option: { type: Schema.Types.ObjectId }
   }
 })
 
