@@ -35,6 +35,11 @@ class EventsService {
     // ...
   }
 
+  async getOptions(eventId) {
+    const event = await this.Event.findOne({ _id: eventId });
+    return event.options;
+  }
+
   async saveEvent(event) {
     await event.save();
     return event;
