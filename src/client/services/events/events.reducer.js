@@ -1,12 +1,13 @@
 import { TYPES } from './events.constants';
+import mapKeys from 'lodash/mapKeys';
 
 const INITIAL_STATE = {
   isFetching: false,
-  events: null,
+  events: {},
   errors: null
 }
 
-export default function reducer(stat = INITIAL_STATE, action) {
+export default function reducer(state = INITIAL_STATE, action) {
   switch(action.type) {
     case TYPES.REQUEST_EVENT:
     case TYPES.REQUEST_EVENTS:
@@ -20,10 +21,12 @@ export default function reducer(stat = INITIAL_STATE, action) {
         }
       };
     case TYPES.RECEIVE_EVENTS:
-      return { ...state, events: [...state.events, ...mapKeys(action.payload, 'id')] };
+      return { ...state, events: {...state.events, ...mapKeys(action.payload, 'id')} };
     case TYPES.CLEAR_EVENTS: 
-      return { ...state, events: null };
+      return { ...state, events: {} };
     case TYPES.SET_ERRORS:
       return { ...state, errors: action.payload }
+    default:
+      return state;
   }
 }

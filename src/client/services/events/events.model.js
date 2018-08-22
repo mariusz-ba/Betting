@@ -4,7 +4,7 @@ export class Event {
   static counter = 0;
 
   constructor(data) {
-    const id = get(data, 'id', counter++);
+    const id = get(data, 'id', Event.counter++);
     const name = get(data, 'name', 'unnamed');
     const organiser = get(data, 'organiser', 0);
     const createdAt = get(data, 'createdAt', Date.now());
