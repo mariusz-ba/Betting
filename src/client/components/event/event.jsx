@@ -4,6 +4,7 @@ import styles from './event.scss';
 
 export default class Event extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     organiser: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
@@ -12,7 +13,12 @@ export default class Event extends Component {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       pool: PropTypes.number.isRequired
-    }))
+    })),
+    onClick: PropTypes.func.isRequired
+  }
+
+  optionClicked(index) {
+    this.props.onClick(this.props.id, this.props.options[index]);
   }
 
   render() {
@@ -23,10 +29,10 @@ export default class Event extends Component {
         <div className={styles['event__header']}>
           <span>{name} created by {organiser} on {date}</span>
         </div>
-        <div className={styles['event__left']}>
+        <div className={styles['event__left']} onClick={() => this.optionClicked(0)}>
           <span>{options[0].name}</span>
         </div>
-        <div className={styles['event__right']}>
+        <div className={styles['event__right']} onClick={() => this.optionClicked(1)}>
           <span>{options[1].name}</span>
         </div>
         <div className={styles['event__footer']}>
@@ -36,3 +42,6 @@ export default class Event extends Component {
     )
   }
 }
+
+// Create option component and move click click handlers to prevent
+// creating functions on every render
