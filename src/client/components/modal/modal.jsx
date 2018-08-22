@@ -46,11 +46,15 @@ export default class Modal extends Component {
       this.props.onDismiss();
   }
 
+  renderContent() {
+    return this.props.children;
+  }
+
   _render() {
     ReactDOM.render(
       <Provider store={store}>
         <div className={styles['click-catcher']}>
-          <div ref={node => { this.modalRef = node }} className={styles.modal}>{this.props.children}</div>
+          <div ref={node => { this.modalRef = node }} className={styles.modal}>{this.renderContent()}</div>
         </div>
       </Provider>,
       this.modalTarget
