@@ -30,6 +30,7 @@ export class Event {
   _getOrganiser(value) {
     if(typeof value !== 'string')
       return '0'
+    return value;
   }
 
   _getCreatedAt(value) {
