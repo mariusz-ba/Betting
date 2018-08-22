@@ -1,0 +1,7 @@
+.events {
+  list-style-type: none;
+
+  li:not(:last-of-type) {
+    margin-bottom: var(--offset-medium);
+  }
+}
