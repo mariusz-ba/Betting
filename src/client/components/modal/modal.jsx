@@ -9,10 +9,14 @@ import Content from './components/content/content';
 import Footer from './components/footer/footer';
 import Header from './components/header/header';
 
+import Input from './components/input/input';
+
 export default class Modal extends Component {
   static Content = Content;
   static Header = Header;
   static Footer = Footer;
+
+  static Input = Input;
 
   static propTypes = {
     onDismiss: PropTypes.func.isRequired
