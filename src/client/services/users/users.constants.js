@@ -1,0 +1,8 @@
+export const TYPES = {
+  REQUEST_USER: '@users/REQUEST_USER',
+  REQUEST_USERS: '@users/REQUEST_USERS',
+  RECEIVE_USER: '@users/RECEIVE_USER',
+  RECEIVE_USERS: '@users/RECEIVE_USERS',
+  SET_ERRORS: '@users/SET_ERRORS',
+  CLEAR_USERS: '@users/CLEAR_USERS'
+}
