@@ -1,0 +1,8 @@
+export const TYPES = {
+  REQUEST_BET: '@bets/REQUEST_BET',
+  REQUEST_BETS: '@bets/REQUEST_BETS',
+  RECEIVE_BET: '@bets/RECEIVE_BET',
+  RECEIVE_BETS: '@bets/RECEIVE_BETS',
+  SET_ERRORS: '@bets/SET_ERRORS',
+  CLEAR_BETS: '@bets/CLEAR_BETS'
+}
