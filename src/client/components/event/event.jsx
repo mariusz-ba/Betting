@@ -14,7 +14,8 @@ export default class Event extends Component {
       name: PropTypes.string.isRequired,
       pool: PropTypes.number.isRequired
     })),
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    userPick: PropTypes.string
   }
 
   optionClicked(index) {
@@ -22,7 +23,7 @@ export default class Event extends Component {
   }
 
   render() {
-    const { name, organiser, date, finished, options } = this.props;
+    const { name, organiser, date, finished, options, userPick } = this.props;
 
     return (
       <div className={styles.event}>
@@ -30,10 +31,10 @@ export default class Event extends Component {
           <span>{name} created by {organiser} on {date}</span>
         </div>
         <div className={styles['event__left']} onClick={() => this.optionClicked(0)}>
-          <span>{options[0].name}</span>
+          <span>{options[0].name} {userPick && userPick === options[0].id && 'Your choice'}</span>
         </div>
         <div className={styles['event__right']} onClick={() => this.optionClicked(1)}>
-          <span>{options[1].name}</span>
+          <span>{options[1].name} {userPick && userPick === options[1].id && 'Your choice'}</span>
         </div>
         <div className={styles['event__footer']}>
           <span>Finished: {finished ? 'Yes' : 'No'}</span>

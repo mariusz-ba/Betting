@@ -10,13 +10,14 @@ export class Bet {
     const option = get(data, 'option', '0');
     const amount = get(data, 'amount', 0);
     const resolved = get(data, 'resolved', {});
+    const won = get(data, 'won', 0);
 
     this.id = id;
     this.user = this._getUser(user);
     this.event = this._getEvent(event);
     this.option = this._getOption(option);
     this.amount = this._getAmount(amount);
-    this.resolved = this._getResolved(resolved);
+    this.resolved = this._getResolved(resolved, won);
   }
 
   _getUser(value) {
@@ -35,7 +36,7 @@ export class Bet {
     return typeof value === 'number' ? value : 0;
   }
 
-  _getResolved(value) {
+  _getResolved(value, won) {
     const defaults = {
       resolved: false,
       won: 0,
@@ -45,10 +46,13 @@ export class Bet {
     if(typeof value !== 'object')
       return defaults;
 
+    if(typeof won !== 'number')
+      return defaults
+
     return {
       resolved: value.resolved ? value.resolved : false,
       option: value.option ? value.option : '0',
-      won: value.won ? value.won : 0
+      won
     }
   }
 }

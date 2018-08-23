@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actions } from '@services/events';
+import { actions as EventsActions } from '@services/events';
+import { actions as BetsActions } from '@services/bets';
 import { eventsSelector } from './selectors';
 import styles from './events.scss';
 
@@ -16,8 +17,13 @@ const INITIAL_STATE = {
 export class Events extends Component {
   state = INITIAL_STATE;
   
-  componentDidMount() {
-    this.props.fetchEvents();
+  async componentDidMount() {
+    await this.props.clearEvents();
+    await this.props.clearBets();
+    await this.props.fetchEvents();
+    // Fetch users bets for given events to be able to display
+    // if user has placed bet on this event
+    this.props.fetchBets({ events: this.props.events.map(event => event.id) });
   }
   
   modalDismiss = () => {
@@ -25,8 +31,9 @@ export class Events extends Component {
   }
 
   modalAccept = (object) => {
-    console.log('Accepted modal: ', object);
     this.setState(INITIAL_STATE);
+    this.props.createBet(object);
+    // If bet wasnt successfully created display modal error
   }
   
   onClickOption = (event, option) => {
@@ -50,7 +57,8 @@ export class Events extends Component {
                   date={event.createdAt}
                   finished={event.result.finished}
                   options={event.options}
-                  onClick={this.onClickOption} />
+                  onClick={this.onClickOption}
+                  userPick={event.userPick} />
               </li>
             ))
           }
@@ -76,6 +84,10 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps, 
   { 
-    fetchEvents: actions.fetchEvents 
+    clearEvents: EventsActions.clearEvents,
+    clearBets: BetsActions.clearBets,
+    fetchEvents: EventsActions.fetchEvents,
+    fetchBets: BetsActions.fetchBets,
+    createBet: BetsActions.createBet
   }
 )(Events);
