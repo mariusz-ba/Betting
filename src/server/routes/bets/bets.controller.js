@@ -26,9 +26,37 @@ export default class UsersController {
   configure() {
     this.router.get(
       '/',
+      authenticate,
       catchExceptions(async (req, res) => {
-        const bets = await BetsService.getBets();
-        res.status(200).json(bets);
+        // For each bet calculate resolved object
+        // {
+        //   resolved: bet.resolved,
+        //   won: calculate won amount of money if resolved,
+        //   option: what was the winning option
+        // }
+        const user = get(req, 'user._id', undefined);
+        const events = get(req, 'query.events', undefined);
+        const query = {};
+
+        if(Array.isArray(events)) query['events'] = events;
+        if(user) query['user'] = user;
+
+        const bets = await BetsService.getBets(query);
+        const result = bets.map(async bet => {
+          const event = await EventsService.getEventById(bet.event);
+          if(event.result.finished) {
+            return {
+              ...bet,
+              resolved: {
+                resolved: true,
+                option: event.result.option
+              }
+            }
+          }
+          return bet;
+        })
+        const response = await Promise.all(result);
+        res.status(200).json(response);
       })
     )
 

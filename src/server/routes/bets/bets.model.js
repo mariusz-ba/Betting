@@ -7,7 +7,8 @@ const Bet = new Schema({
   event: { type: Schema.Types.ObjectId, required: true, ref: 'Event' },
   option: { type: Schema.Types.ObjectId, required: true },
   amount: { type: Number, required: true },
-  resolved: { type: Boolean, default: false }
+  resolved: { type: Boolean, default: false },
+  won: { type: Number, default: 0 }
 })
 
 export default mongoose.model('Bet', Bet);

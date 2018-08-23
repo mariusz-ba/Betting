@@ -6,7 +6,11 @@ class BetsService {
   }
 
   async getBets(query = {}, filter = {}) {
-    return this.Bet.find(query, null, filter);
+    const params = {};
+    if(query.events) params['event'] = { $in: query.events };
+    if(query.user) params['user'] = query.user;
+
+    return this.Bet.find(params, null, filter);
   }
 
   async getBetById(betId) {
