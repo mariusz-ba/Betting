@@ -37,7 +37,7 @@ class EventsService {
 
   async getOptions(eventId) {
     const event = await this.Event.findOne({ _id: eventId });
-    return event.options;
+    return [].concat(event.options);
   }
 
   async saveEvent(event) {

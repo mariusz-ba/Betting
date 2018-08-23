@@ -67,7 +67,9 @@ export default class UsersController {
         // Validate incomming data
         const getEvent = await EventsService.getEventById(event);
         const getOptions = await EventsService.getOptions(event);
-        const includes = getOptions.map(option => option._id).includes(event);
+        const includes = getOptions
+                          .map(option => option._id.toString())
+                          .includes(option.toString());
 
         if(!getEvent || !includes) {
           res.status(400).json({
