@@ -3,6 +3,7 @@ import { catchExceptions } from '../../middleware/exceptions';
 import UsersService from './users.service';
 import User from './users.model';
 import omit from 'lodash/omit';
+import authenticate from '../../middleware/authenticate';
 
 export default class UsersController {
 
@@ -22,17 +23,32 @@ export default class UsersController {
   configure() {
     this.router.get(
       '/',
+      authenticate,
       catchExceptions(async (req, res) => {
         const users = await UsersService.getUsers();
-        res.status(200).json(users);
+
+        // Prevent sending other users wallets
+        const result = users.map(user => {
+          if(req.user._id.equals(user._id))
+            return user;
+          return omit(user.toObject(), 'wallet');
+        })
+        const response = await Promise.all(result);
+        res.status(200).json(response);
       })
     );
 
     this.router.get(
       '/:id',
+      authenticate,
       catchExceptions(async (req, res) => {
         const user = await UsersService.getUserById(req.params.id);
-        res.status(200).json(user);
+        
+        // Prevent sending other users wallets
+        if(req.user._id.equals(req.params.id))
+          res.status(200).json(user);
+        else
+          res.status(200).json(omit(user.toObject(), 'wallet'));
       })
     )
 
