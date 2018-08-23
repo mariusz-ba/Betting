@@ -24,8 +24,13 @@ export default class UsersController {
     this.router.get(
       '/',
       catchExceptions(async (req, res) => {
-        const events = await EventsService.getEvents();
-        res.status(200).json(events);
+        const events = get(req, 'query.events', undefined);
+        const query = {};
+
+        if(Array.isArray(events)) query['events'] = events;
+
+        const result = await EventsService.getEvents(query);
+        res.status(200).json(result);
       })
     )
 

@@ -8,7 +8,10 @@ class EventsService {
   async getEvents(query = {}, filter = {}) {
     // For each event calculate total amount of money
     // placed on each option
-    return this.Event.find(query, null, filter);
+    const params = {};
+    if(query.events) params['_id'] = { $in: query.events };
+
+    return this.Event.find(params, null, filter);
   }
 
   async getEventById(eventId) {
