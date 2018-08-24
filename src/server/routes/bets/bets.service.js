@@ -9,6 +9,7 @@ class BetsService {
     const params = {};
     if(query.events) params['event'] = { $in: query.events };
     if(query.user) params['user'] = query.user;
+    if(query.event) params['event'] = query.event;
 
     return this.Bet.find(params, null, filter);
   }

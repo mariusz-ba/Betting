@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { catchExceptions } from '../../middleware/exceptions';
 import EventsService from './events.service';
 import Event from './events.model';
+import { BetsService } from '../bets';
 import authenticate from '../../middleware/authenticate';
 import get from 'lodash/get';
 
@@ -32,7 +33,27 @@ export default class UsersController {
         if(typeof organiser === 'string') query['organiser'] = organiser;
 
         const result = await EventsService.getEvents(query);
-        res.status(200).json(result);
+        // For each event caluclate pool
+        const response = result.map(async event => {
+          const bets = await BetsService.getBets({ event: event._id });
+
+          const options = event.options.map(option => {
+            const pool = bets
+              .filter(bet => option._id.equals(bet.option))
+              .reduce((acc, bet) => acc + bet.amount, 0);
+            return {
+              ...option._doc,
+              pool
+            }
+          })
+
+          return {
+            ...event._doc,
+            options
+          }
+        })
+
+        res.status(200).json(await Promise.all(response));
       })
     )
 
