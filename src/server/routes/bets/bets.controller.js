@@ -46,7 +46,7 @@ export default class UsersController {
           const event = await EventsService.getEventById(bet.event);
           if(event.result.finished) {
             return {
-              ...bet,
+              ...bet._doc,
               resolved: {
                 resolved: true,
                 option: event.result.option

@@ -9,7 +9,7 @@ export class Bets extends Component {
   async componentDidMount() {
     this.props.clearBets();
     this.props.clearEvents();
-    await this.props.fetchBets(this.props.user);
+    await this.props.fetchBets({ user: this.props.user });
     this.props.fetchEvents({ events: this.props.bets.map(bet => bet.event) })
   }
 
