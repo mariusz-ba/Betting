@@ -25,9 +25,11 @@ export default class UsersController {
       '/',
       catchExceptions(async (req, res) => {
         const events = get(req, 'query.events', undefined);
+        const organiser = get(req, 'query.organiser', undefined);
         const query = {};
 
         if(Array.isArray(events)) query['events'] = events;
+        if(typeof organiser === 'string') query['organiser'] = organiser;
 
         const result = await EventsService.getEvents(query);
         res.status(200).json(result);

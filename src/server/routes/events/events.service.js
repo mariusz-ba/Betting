@@ -10,6 +10,7 @@ class EventsService {
     // placed on each option
     const params = {};
     if(query.events) params['_id'] = { $in: query.events };
+    if(query.organiser) params['organiser'] = query.organiser;
 
     return this.Event.find(params, null, filter);
   }
