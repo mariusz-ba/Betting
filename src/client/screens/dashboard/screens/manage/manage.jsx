@@ -20,7 +20,11 @@ export class Manage extends Component {
           <ul className={styles.events}>
             { events &&
               events.map(event => (
-                <li key={event.id}>{event.name}</li>
+                <li key={event.id}>
+                  <p>{event.name}</p>
+                  <p>  {event.options[0].name}: x{event.options[0].multiplier} Total: {event.options[0].pool} Odds: {event.options[0].odds}%</p>
+                  <p>  {event.options[1].name}: x{event.options[1].multiplier} Total: {event.options[1].pool} Odds: {event.options[1].odds}%</p>
+                </li>
               )) 
             }
           </ul>
