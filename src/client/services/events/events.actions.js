@@ -65,6 +65,7 @@ export const fetchEvents = (filter = {}) => {
 
 export const closeEvent = (eventId, optionId) => {
   return async dispatch => {
+    dispatch(requestEvent(eventId));
     try {
       const res = await axios.put(`/api/events/${eventId}`, { winner: optionId });
       const data = res.data;
