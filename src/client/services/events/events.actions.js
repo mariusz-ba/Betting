@@ -62,3 +62,16 @@ export const fetchEvents = (filter = {}) => {
     }
   }
 }
+
+export const closeEvent = (eventId, optionId) => {
+  return async dispatch => {
+    try {
+      const res = await axios.put(`/api/events/${eventId}`, { winner: optionId });
+      const data = res.data;
+      const event = new Event({ id: data._id, ...data });
+      dispatch(receiveEvent(event));
+    } catch (error) {
+      dispatch(setErrors(error.response.data));
+    }
+  }
+}

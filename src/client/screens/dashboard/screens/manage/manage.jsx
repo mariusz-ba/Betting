@@ -10,6 +10,11 @@ export class Manage extends Component {
     this.props.clearEvents();
     this.props.fetchEvents({ organiser: this.props.user });
   }
+
+  finish = (event, option) => {
+    this.props.closeEvent(event, option);
+  }
+
   render() {
     const { events } = this.props;
 
@@ -22,8 +27,18 @@ export class Manage extends Component {
               events.map(event => (
                 <li key={event.id}>
                   <p>{event.name}</p>
-                  <p>  {event.options[0].name}: x{event.options[0].multiplier} Total: {event.options[0].pool} Odds: {event.options[0].odds}%</p>
-                  <p>  {event.options[1].name}: x{event.options[1].multiplier} Total: {event.options[1].pool} Odds: {event.options[1].odds}%</p>
+                  <p>{event.options[0].name}: x{event.options[0].multiplier} Total: {event.options[0].pool} Odds: {event.options[0].odds}%</p>
+                  <p>{event.options[1].name}: x{event.options[1].multiplier} Total: {event.options[1].pool} Odds: {event.options[1].odds}%</p>
+                  { event.result.finished === true &&
+                    <p>Closed</p>
+                  }
+                  { event.result.finished === false &&
+                    <div>
+                      <p>Winner</p>
+                      <button onClick={() => this.finish(event.id, event.options[0].id)}>First</button>
+                      <button onClick={() => this.finish(event.id, event.options[1].id)}>Second</button>
+                    </div>
+                  }
                 </li>
               )) 
             }
@@ -45,6 +60,7 @@ export default connect(
   mapStateToProps,
   {
     clearEvents: EventsActions.clearEvents,
-    fetchEvents: EventsActions.fetchEvents
+    fetchEvents: EventsActions.fetchEvents,
+    closeEvent: EventsActions.closeEvent
   }
 )(Manage);
