@@ -1,4 +1,5 @@
 import Bet from './bets.model';
+import asyncForEach from '../../utils/asyncForEach';
 
 class BetsService {
   constructor(Bet) {
@@ -21,6 +22,17 @@ class BetsService {
   async saveBet(bet) {
     await bet.save();
     return bet;
+  }
+
+  async resolveBets(event, option, multipliers) {
+    const bets = await this.Bet.find({ event, resolved: false });
+    await asyncForEach(bets, async bet => {
+      const correct = bet.option.equals(option) ? true : false;
+      const won = correct ? Math.floor(multipliers[option] * bet.amount) : 0;
+
+      await this.Bet.findOneAndUpdate({ _id: bet._id }, { $set: { resolved: true, won: won }});
+    })
+    return this.Bet.find({ event, resolved: true });
   }
 }
 

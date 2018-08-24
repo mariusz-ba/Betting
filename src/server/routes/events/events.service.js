@@ -48,6 +48,21 @@ class EventsService {
     await event.save();
     return event;
   }
+
+  async closeEvent(eventId, optionId) {
+    return this.Event.findOneAndUpdate(
+      { _id: eventId }, 
+      { 
+        $set: { 
+          result: {
+            finished: true,
+            option: optionId
+          }
+        }
+      },
+      { new: true }
+    )
+  }
 }
 
 export default new EventsService(Event);
