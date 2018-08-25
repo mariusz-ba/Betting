@@ -1,0 +1,21 @@
+.options {
+  background: var(--color-white);
+  padding: var(--offset-medium);
+  display: grid;
+  grid-gap: var(--offset-medium);
+  grid-template-columns: 1fr max-content 1fr;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  
+  & p {
+    background: var(--color-gray-0);
+    color: var(--color-gray-7);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+    padding: var(--offset-medium);
+    border-radius: 50%;
+  }
+}
