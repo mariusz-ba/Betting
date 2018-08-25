@@ -33,4 +33,5 @@ export const betsSelector = createSelector(
 
       return { ...bet, options, pick, potentialReward };
     })
+    .sort((lhs, rhs) => lhs.createdAt > rhs.createdAt)
 )

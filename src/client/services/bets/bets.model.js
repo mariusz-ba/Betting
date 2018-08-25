@@ -11,6 +11,7 @@ export class Bet {
     const amount = get(data, 'amount', 0);
     const resolved = get(data, 'resolved', {});
     const won = get(data, 'won', 0);
+    const createdAt = get(data, 'createdAt', Date.now);
 
     this.id = id;
     this.user = this._getUser(user);
@@ -18,6 +19,7 @@ export class Bet {
     this.option = this._getOption(option);
     this.amount = this._getAmount(amount);
     this.resolved = this._getResolved(resolved, won);
+    this.createdAt = this._getCreatedAt(createdAt);
   }
 
   _getUser(value) {
@@ -54,5 +56,9 @@ export class Bet {
       option: value.option ? value.option : '0',
       won
     }
+  }
+
+  _getCreatedAt(value) {
+    return typeof value === 'number' ? value : Date.now;
   }
 }

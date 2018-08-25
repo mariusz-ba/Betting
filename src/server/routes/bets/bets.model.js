@@ -8,7 +8,8 @@ const Bet = new Schema({
   option: { type: Schema.Types.ObjectId, required: true },
   amount: { type: Number, required: true },
   resolved: { type: Boolean, default: false },
-  won: { type: Number, default: 0 }
+  won: { type: Number, default: 0 },
+  createdAt: { type: Number, default: Date.now }
 })
 
 export default mongoose.model('Bet', Bet);
