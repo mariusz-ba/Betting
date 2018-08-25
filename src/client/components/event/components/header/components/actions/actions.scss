@@ -1,0 +1,8 @@
+.actions {
+  display: flex;
+  justify-content: flex-end;
+
+  & > *:not(:last-of-type) {
+    margin-right: var(--offset-medium);
+  }
+}
