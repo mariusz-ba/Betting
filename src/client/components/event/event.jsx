@@ -26,7 +26,7 @@ export default class Event extends Component {
   }
 
   optionClicked(index) {
-    if(!this.props.finished)
+    if(!this.props.finished && !this.props.userPick)
       this.props.onClick(this.props.id, this.props.options[index]);
   }
 
