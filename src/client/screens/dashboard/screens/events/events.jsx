@@ -56,6 +56,7 @@ export class Events extends Component {
                   organiser={event.organiser}
                   date={event.createdAt}
                   finished={event.result.finished}
+                  winner={event.result.option}
                   options={event.options}
                   onClick={this.onClickOption}
                   userPick={event.userPick} />
