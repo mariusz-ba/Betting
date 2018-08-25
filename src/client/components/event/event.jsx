@@ -3,7 +3,17 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './event.scss';
 
+import Header from './components/header/header';
+import Time from './components/header/components/time/time';
+import Title from './components/header/components/title/title';
+import Actions from './components/header/components/actions/actions';
+
+import Options from './components/options/options';
+import Option from './components/options/components/option/option';
+
 export default class Event extends Component {
+  static Actions = Actions;
+
   static propTypes = {
     id: PropTypes.string.isRequired,
     // Events name to be displayed on top
@@ -40,41 +50,38 @@ export default class Event extends Component {
       [styles['event--finished']]: finished
     });
 
-    const option1Class = classnames(styles.option, {
-      [styles['option--pick']]: userPick && userPick === options[0].id,
-      [styles['option--winner']]: winner && winner === options[0].id,
-    })
-
-    const option2Class = classnames(styles.option, {
-      [styles['option--pick']]: userPick && userPick === options[1].id,
-      [styles['option--winner']]: winner && winner === options[1].id,
-    })
+    const actions = 
+      this.props.children && 
+      this.props.children.type &&
+      this.props.children.type === Actions ? this.props.children : <Actions></Actions>;
 
     return (
       <div className={eventClass}>
-        <div className={styles.header}>
-          <p className={styles.date}>{(new Date(date)).toLocaleString()}</p>
-          <h3 className={styles.title}>{name}</h3>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.option1}>
-            <div className={option1Class} onClick={() => this.optionClicked(0)}>
-                <h3 className={styles.option__name}>{options[0].name}</h3>
-                <p className={styles.option__multiplier}>x{options[0].multiplier.toFixed(2)}</p>
-              </div>
-              <div className={styles.odds}>{options[0].odds}%</div>
-            </div>
-          <div className={styles.separator}>
-            <p>VS</p>
-          </div>
-          <div className={styles.option2}>
-            <div className={styles.odds}>{options[1].odds}%</div>
-            <div className={option2Class} onClick={() => this.optionClicked(1)}>
-              <h3 className={styles.option__name}>{options[1].name}</h3>
-              <p className={styles.option__multiplier}>x{options[1].multiplier.toFixed(2)}</p>
-            </div>
-          </div>
-        </div>
+        <Header>
+          <Time>{(new Date(date)).toLocaleString()}</Time>
+          <Title>{name}</Title>
+          { actions }
+        </Header>
+        <Options>
+          <Option
+            left
+            disabled={finished || userPick}
+            name={options[0].name}
+            multiplier={options[0].multiplier}
+            odds={options[0].odds}
+            pick={userPick && userPick === options[0].id}
+            winner={winner && winner === options[0].id}
+            onClick={() => this.optionClicked(0)} />
+          <Option
+            right
+            disabled={finished || userPick}
+            name={options[1].name}
+            multiplier={options[1].multiplier}
+            odds={options[1].odds}
+            pick={userPick && userPick === options[1].id}
+            winner={winner && winner === options[1].id}
+            onClick={() => this.optionClicked(1)} />
+        </Options>
       </div>
     )
   }

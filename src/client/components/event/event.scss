@@ -1,143 +1,22 @@
 .event {
-  box-shadow: 0 0 3px var(--color-gray-4);
+  box-shadow: 0 0 5px var(--color-gray-4);
 
   &--finished {
     position: relative;
-    &::before {
-      position: absolute;
+    box-shadow: 0 0 3px var(--color-gray-4);
+
+    &::after {
       content: '';
+      position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0;
-      background: var(--color-black);
-      opacity: 0.05;
-    }
 
-    .option {
-      &:hover {
-        cursor: default;
-        background: transparent;
-      }
+      background: var(--color-gray-3);
+      opacity: 0.2;
+
+      pointer-events: none;
     }
   }
-
-}
-
-.header {
-  padding: var(--offset-medium);
-  border-bottom: 1px solid var(--color-gray-3);
-  display: grid;
-  grid-template-columns: 1fr max-content 1fr;
-}
-
-.date {
-  font-size: var(--font-size-small);
-}
-
-.title {
-  font-size: var(--font-size-medium);
-  text-align: center;
-}
-
-.content {
-  background: var(--color-white);
-  padding: var(--offset-medium);
-  display: grid;
-  grid-gap: var(--offset-medium);
-  grid-template-columns: 1fr max-content 1fr;
-}
-
-.option1,
-.option2 {
-  text-align: center;
-  display: grid;
-  grid-template-columns: 2fr max-content;
-  grid-gap: var(--offset-medium);
-  align-items: center;
-}
-
-.option2 {
-  grid-template-columns: max-content 2fr;
-}
-
-.odds { 
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-7);
-}
-
-.option {
-  padding: var(--offset-medium);
-
-  &:hover {
-    cursor: pointer;
-    background: var(--color-gray-0);
-  }
-
-  &__name {
-    margin-bottom: var(--offset-small);
-  }
-
-  &__name,
-  &__multiplier {
-    font-size: var(--font-size-medium);
-    font-weight: var(--font-weight-bold);
-  }
-
-  &__multiplier {
-    color: var(--color-primary);
-  }
-
-  &--pick,
-  &--winner {
-    position: relative;
-
-    &::before,
-    &::after {
-      font-family: "Font Awesome 5 Free"; 
-      font-weight: 900; 
-      position: absolute;
-      width: 32px;
-      height: 48px;
-      text-align: center;
-      line-height: 32px;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
-    }
-  }
-
-  &--pick {
-    border: 1px solid var(--color-gray-3);
-    &::before {
-      content: "\f4c0";
-      top: -1px;
-      left: 16px;
-
-      background: orangered;
-      color: white;
-    }
-  }
-
-  &--winner {
-    &::after {
-      content: "\f091";
-      top: -1px;
-      right: 16px;
-
-      background: var(--color-primary);
-      color: white;
-    }
-  }
-}
-
-.separator {
-  display: flex;
-  align-items: center;
-}
-.separator p {
-  background: var(--color-gray-0);
-  color: var(--color-gray-7);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-medium);
-  padding: var(--offset-medium);
-  border-radius: 50%;
 }
