@@ -44,8 +44,8 @@ export class Events extends Component {
     const { events } = this.props;
 
     return (
-      <div>
-        <h1>Events</h1>
+      <div className={styles.container}>
+        <h1 className={styles.heading}>Recent events</h1>
         <ul className={styles.events}>
           { events &&
             events.map(event => (
