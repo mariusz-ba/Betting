@@ -1,3 +1,9 @@
 .events {
   list-style-type: none;
+  max-width: 960px;
+  margin: 0 auto;
+
+  li:not(:last-of-type) {
+    margin-bottom: var(--offset-medium);
+  }
 }

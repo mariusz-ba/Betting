@@ -22,10 +22,13 @@ export default class Event extends Component {
     })),
 
     // Function executed every time user clicks an option
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func
   }
 
   optionClicked(index) {
+    if(!this.props.onClick)
+      return;
+
     if(!this.props.finished && !this.props.userPick)
       this.props.onClick(this.props.id, this.props.options[index]);
   }

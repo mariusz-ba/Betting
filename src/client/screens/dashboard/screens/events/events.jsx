@@ -53,7 +53,6 @@ export class Events extends Component {
                 <Event
                   id={event.id}
                   name={event.name}
-                  organiser={event.organiser}
                   date={event.createdAt}
                   finished={event.result.finished}
                   winner={event.result.option}

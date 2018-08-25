@@ -5,6 +5,8 @@ import { eventsSelector, userSelector } from './manage.selectors';
 import { Link } from 'react-router-dom';
 import styles from './manage.scss';
 
+import Event from '@components/event/event';
+
 export class Manage extends Component {
   async componentDidMount() {
     this.props.clearEvents();
@@ -26,7 +28,7 @@ export class Manage extends Component {
             { events &&
               events.map(event => (
                 <li key={event.id}>
-                  <p>{event.name}</p>
+                  {/* <p>{event.name}</p>
                   <p>{event.options[0].name}: x{event.options[0].multiplier} Total: {event.options[0].pool} Odds: {event.options[0].odds}%</p>
                   <p>{event.options[1].name}: x{event.options[1].multiplier} Total: {event.options[1].pool} Odds: {event.options[1].odds}%</p>
                   { event.result.finished === true &&
@@ -38,7 +40,14 @@ export class Manage extends Component {
                       <button onClick={() => this.finish(event.id, event.options[0].id)}>First</button>
                       <button onClick={() => this.finish(event.id, event.options[1].id)}>Second</button>
                     </div>
-                  }
+                  } */}
+                  <Event
+                    id={event.id}
+                    name={event.name}
+                    date={event.createdAt}
+                    finished={event.result.finished}
+                    winner={event.result.option}
+                    options={event.options} />
                 </li>
               )) 
             }

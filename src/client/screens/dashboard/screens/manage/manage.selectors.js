@@ -15,4 +15,5 @@ export const eventsSelector = createSelector(
   (user, events) => Object.values(events.events)
     .filter(event => event.organiser === user)
     .map(event => ({ ...event, options: calculateOdds(event.options)}))
+    .sort((lhs, rhs) => lhs.createdAt < rhs.createdAt)
 )
