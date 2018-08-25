@@ -15,7 +15,7 @@ export class Bets extends Component {
 
   render() {
     const { bets } = this.props;
-
+    
     return (
       <div>
         <h1 className={styles.heading}>My bets</h1>
@@ -39,8 +39,8 @@ export class Bets extends Component {
                     <td>{bet.options[0]} vs {bet.options[1]}</td>
                     <td><strong>{bet.pick}</strong></td>
                     <td>{bet.amount} coins</td>
-                    <td>-</td>
-                    <td>{bet.resolved.resolved ? 'Resolved' : 'Pending'}</td>
+                    <td>{bet.potentialReward}</td>
+                    <td>{bet.resolved.resolved ? bet.resolved.won - bet.amount : 'Pending'}</td>
                   </tr>
                 ))
               }
