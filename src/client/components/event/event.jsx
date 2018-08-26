@@ -58,7 +58,14 @@ export default class Event extends Component {
     return (
       <div className={eventClass}>
         <Header>
-          <Time>{(new Date(date)).toLocaleString()}</Time>
+          <Time>
+            {(new Date(date)).toLocaleDateString('pl-PL', {
+              day: 'numeric',
+              month: 'short',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </Time>
           <Title>{name}</Title>
           { actions }
         </Header>
