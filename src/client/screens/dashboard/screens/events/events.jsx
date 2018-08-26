@@ -30,9 +30,10 @@ export class Events extends Component {
     this.setState(INITIAL_STATE);
   }
 
-  modalAccept = (object) => {
+  modalAccept = async (object) => {
     this.setState(INITIAL_STATE);
-    this.props.createBet(object);
+    await this.props.createBet(object);
+    this.props.fetchEvent(object.event);
     // If bet wasnt successfully created display modal error
   }
   
@@ -87,6 +88,7 @@ export default connect(
     clearEvents: EventsActions.clearEvents,
     clearBets: BetsActions.clearBets,
     fetchEvents: EventsActions.fetchEvents,
+    fetchEvent: EventsActions.fetchEvent,
     fetchBets: BetsActions.fetchBets,
     createBet: BetsActions.createBet
   }

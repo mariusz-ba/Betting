@@ -48,7 +48,8 @@ export default class UsersController {
       '/:id',
       catchExceptions(async (req, res) => {
         const event = await EventsService.getEventById(req.params.id);
-        res.status(200).json(event);
+        const eventWithPool = await this.calculatePool(event);
+        res.status(200).json(eventWithPool);
       })
     )
 
