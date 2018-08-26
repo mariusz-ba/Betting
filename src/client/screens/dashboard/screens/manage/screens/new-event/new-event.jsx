@@ -72,7 +72,7 @@ export class NewEvent extends Component {
     const { name, options, errors } = this.state;
 
     return (
-      <div>
+      <div className={styles.wrapper}>
         <h1>Create new event</h1>
         <div className={styles.container}>
           <div className={styles.section}>
