@@ -42,8 +42,8 @@ export class Manage extends Component {
                     options={event.options} >
                     { event.result.finished === false &&
                       <Event.Actions>
-                        <button onClick={() => this.finish(event.id, event.options[0].id)}>First</button>
-                        <button onClick={() => this.finish(event.id, event.options[1].id)}>Second</button>
+                        <button className={styles.action} onClick={() => this.finish(event.id, event.options[0].id)}>First</button>
+                        <button className={styles.action} onClick={() => this.finish(event.id, event.options[1].id)}>Second</button>
                       </Event.Actions>  
                     }
                   </Event>

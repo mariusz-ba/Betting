@@ -36,3 +36,16 @@
     margin-bottom: var(--offset-medium);
   }
 }
+
+.action {
+  border: 0;
+  outline: 0;
+  background: var(--color-white);
+  padding: var(--offset-small);
+  border: 1px solid var(--color-gray-3);
+
+  &:hover {
+    cursor: pointer;
+    background: var(--color-gray-0);
+  }
+}
