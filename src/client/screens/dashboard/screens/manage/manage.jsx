@@ -22,7 +22,12 @@ export class Manage extends Component {
 
     return (
       <div>
-        <h1>My Events <Link to="/manage/new">New Event</Link></h1>
+        <div className={styles.header}>
+          <div className={styles.wrapper}>
+            <h1 className={styles.header__title}>My Events</h1>
+            <Link to="/manage/new" className={styles.header__button}>Create</Link>
+          </div>
+        </div>
         <div>
           <ul className={styles.events}>
             { events &&
