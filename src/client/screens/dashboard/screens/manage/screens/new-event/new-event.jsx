@@ -73,7 +73,7 @@ export class NewEvent extends Component {
 
     return (
       <div className={styles.wrapper}>
-        <h1>Create new event</h1>
+        <h1 className={styles.heading}>Create new event</h1>
         <div className={styles.container}>
           <div className={styles.section}>
           { errors &&
