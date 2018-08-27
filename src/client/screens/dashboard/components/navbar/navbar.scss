@@ -24,11 +24,13 @@
       background: var(--color-gray-0);
     }
 
+    
     &--open {
       background: var(--color-gray-0);
       
       .submenu {
-        display: block;
+        max-height: var(--max-height);
+        visibility: visible;
       }
     }
 
@@ -68,8 +70,10 @@
 }
 
 .submenu {
+  overflow: hidden;
   position: absolute;
-  display: none;
+  max-height: 0px;
+  visibility: hidden;
   z-index: 100;
   top: 100%;
   right: -1px;
@@ -77,7 +81,10 @@
   list-style-type: none;
   font-size: var(--font-size-small);
   background: var(--color-white);
+
   border: 1px solid var(--color-gray-3);
+
+  transition: max-height ease-in .125s;
 
   &__item {
     &:hover {
@@ -85,15 +92,21 @@
     }
     
     a {
-      padding: var(--offset-small);
+      padding: var(--offset-medium);
       display: block;
       text-decoration: none;
       color: var(--color-black);
+    }
+    
+    &:not(:last-of-type) a {
+      border-bottom: 1px solid var(--color-gray-3);
     }
   }
 
   @media screen and (max-width: 768px) {
     width: 100vw;
+    border-right: 0;
+    border-left: 0;
   }
 }
 

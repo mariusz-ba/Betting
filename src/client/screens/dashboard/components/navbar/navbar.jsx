@@ -19,6 +19,9 @@ export class Navbar extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    // Set submenus max height
+    this.submenu1.style.setProperty('--max-height', this.submenu1.scrollHeight + 'px');
+    this.submenu2.style.setProperty('--max-height', this.submenu2.scrollHeight + 'px');
   }
 
   componentWillUnmount() {
@@ -60,7 +63,7 @@ export class Navbar extends Component {
               <span className={styles.wallet__title}>Coins</span>
               <span className={styles.wallet__coins}>$ {this.props.wallet.toFixed(2)}</span>
             </div>
-            <ul className={styles.submenu}>
+            <ul className={styles.submenu} ref={node => { this.submenu1 = node }}>
               <li className={styles.submenu__item}><Link to="/wallet">Withdraw</Link></li>
               <li className={styles.submenu__item}><Link to="/wallet">Refill</Link></li>
             </ul>
@@ -69,8 +72,9 @@ export class Navbar extends Component {
             <div className={styles.avatar}>
               <i className="fas fa-user"></i>
             </div>
-            <ul className={styles.submenu}>
+            <ul className={styles.submenu} ref={node => { this.submenu2 = node }}>
               <li className={styles.submenu__item}><Link to="/manage">My events</Link></li>
+              <li className={styles.submenu__item}><Link to="/bets">My bets</Link></li>
               <li className={styles.submenu__item}><Link to="/settings">Settings</Link></li>
               <li className={styles.submenu__item}><Link to="#" onClick={this.props.signout}>Sign out</Link></li>
             </ul>
