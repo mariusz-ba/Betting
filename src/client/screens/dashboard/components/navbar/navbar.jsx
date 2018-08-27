@@ -5,6 +5,7 @@ import { actions as SessionActions } from '@services/session';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './navbar.scss';
+import { walletSelector } from './navbar.selector';
 
 export class Navbar extends Component {
   state = {
@@ -57,7 +58,7 @@ export class Navbar extends Component {
           <li ref={node => { this.walletRef = node }} className={walletStyle} onClick={this.toggleWallet}>
             <div className={styles.wallet}>
               <span className={styles.wallet__title}>Coins</span>
-              <span className={styles.wallet__coins}>$ 153.12</span>
+              <span className={styles.wallet__coins}>$ {this.props.wallet.toFixed(2)}</span>
             </div>
             <ul className={styles.submenu}>
               <li className={styles.submenu__item}><Link to="/wallet">Withdraw</Link></li>
@@ -80,6 +81,15 @@ export class Navbar extends Component {
   }
 }
 
-export default connect(null, {
-  signout: SessionActions.signout
-})(Navbar);
+function mapStateToProps(state) {
+  return {
+    wallet: walletSelector(state)
+  }
+}
+
+export default connect(
+  mapStateToProps, 
+  {
+    signout: SessionActions.signout
+  }
+)(Navbar);
