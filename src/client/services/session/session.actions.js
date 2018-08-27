@@ -2,6 +2,7 @@ import { TYPES } from './session.constants';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from './setAuthorizationToken';
+import { fetchUser } from '../users/users.actions';
 
 // Action creators
 export const requestSignin = credentials => ({
@@ -32,7 +33,12 @@ export const signin = credentials => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
-      dispatch(setCurrentUser(jwt.decode(token).data));
+      const user = jwt.decode(token).data;
+      dispatch(setCurrentUser(user));
+
+      // Fetch current users data
+      dispatch(fetchUser(user._id));
+
       return Promise.resolve();
     } catch (error) {
       dispatch(setSessionErrors(error.response.data.fields));

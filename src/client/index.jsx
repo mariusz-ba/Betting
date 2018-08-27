@@ -8,11 +8,14 @@ import store from './store';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from './services/session/setAuthorizationToken';
 import { setCurrentUser } from './services/session/session.actions';
+import { fetchUser } from './services/users/users.actions';
 
 const token = localStorage.getItem('jwtToken');
 if(token) {
   setAuthorizationToken(token);
-  store.dispatch(setCurrentUser(jwt.decode(token).data));
+  const user = jwt.decode(token).data;
+  store.dispatch(setCurrentUser(user));
+  store.dispatch(fetchUser(user._id));
 }
 
 render(
