@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions as EventsActions } from '@services/events';
 import { actions as BetsActions } from '@services/bets';
-import { eventsSelector } from './selectors';
+import { actions as UsersActions } from '@services/users';
+import { eventsSelector, userSelector } from './selectors';
 import styles from './events.scss';
 
 import Event from '@components/event/event';
@@ -34,6 +35,7 @@ export class Events extends Component {
     this.setState(INITIAL_STATE);
     await this.props.createBet(object);
     this.props.fetchEvent(object.event);
+    this.props.updateWallet(this.props.user);
     // If bet wasnt successfully created display modal error
   }
   
@@ -78,6 +80,7 @@ export class Events extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: userSelector(state),
     events: eventsSelector(state)
   }
 }
@@ -85,6 +88,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps, 
   { 
+    updateWallet: UsersActions.updateWallet,
     clearEvents: EventsActions.clearEvents,
     clearBets: BetsActions.clearBets,
     fetchEvents: EventsActions.fetchEvents,

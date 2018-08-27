@@ -32,6 +32,11 @@ export const clearUsers = () => ({
   type: TYPES.CLEAR_USERS
 })
 
+export const updatedWallet = (userId, wallet) => ({
+  type: TYPES.UPDATE_WALLET,
+  payload: { userId, wallet }
+})
+
 // Thunks
 export const fetchUser = (id) => {
   return async dispatch => {
@@ -57,6 +62,24 @@ export const fetchUsers = (filter = {}) => {
         Array.isArray(data) ?
         data.map(item => new User({ id: item._id, ...item })) : [];
       dispatch(receiveUsers(users));
+    } catch (error) {
+      dispatch(setErrors(error.response.data));
+    }
+  }
+}
+
+export const updateWallet = (userId) => {
+  return async (dispatch, getState) => {
+    try {
+      // User must exist in store
+      if(!getState().users.users[userId])
+        return;
+      
+      const res = await axios.get(`/api/users/${userId}`);
+      const data = res.data;
+      const user = new User({ id: data._id, ...data });
+      const wallet = user.wallet;
+      dispatch(updatedWallet(userId, wallet));
     } catch (error) {
       dispatch(setErrors(error.response.data));
     }

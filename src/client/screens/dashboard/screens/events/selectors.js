@@ -23,3 +23,8 @@ export const eventsSelector = createSelector(
     })
     .sort((lhs, rhs) => lhs.createdAt < rhs.createdAt)
 )
+
+export const userSelector = createSelector(
+  state => state.session,
+  session => session.user._id
+)

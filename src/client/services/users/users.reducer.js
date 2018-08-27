@@ -25,7 +25,19 @@ export default function reducer(state = INITIAL_STATE, action) {
     case TYPES.CLEAR_USERS: 
       return { ...state, users: {} };
     case TYPES.SET_ERRORS:
-      return { ...state, errors: action.payload }
+      return { ...state, errors: action.payload };
+    case TYPES.UPDATE_WALLET:
+      const { userId, wallet } = action.payload;
+      return { 
+        ...state, 
+        users: { 
+          ...state.users, 
+          [userId]: { 
+            ...state.users[userId], 
+            wallet 
+          }
+        }
+      }
     default:
       return state;
   }

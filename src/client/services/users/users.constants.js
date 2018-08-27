@@ -4,5 +4,6 @@ export const TYPES = {
   RECEIVE_USER: '@users/RECEIVE_USER',
   RECEIVE_USERS: '@users/RECEIVE_USERS',
   SET_ERRORS: '@users/SET_ERRORS',
-  CLEAR_USERS: '@users/CLEAR_USERS'
+  CLEAR_USERS: '@users/CLEAR_USERS',
+  UPDATE_WALLET: '@users/UPDATE_WALLET'
 }
