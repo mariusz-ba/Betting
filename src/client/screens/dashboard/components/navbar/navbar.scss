@@ -1,19 +1,111 @@
 .navbar {
+  position: relative;
   grid-area: navbar;
-  background: var(--color-gray-1);
   display: flex;
-  padding: 0 var(--offset-medium);
+  justify-content: space-between;
+  background: var(--color-gray-1);
   border-bottom: 1px solid var(--color-gray-3);
+
+  &__menu {
+    list-style-type: none;
+    display: flex;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 var(--offset-medium);
+    border-left: 1px solid var(--color-gray-3);
+
+    &:hover {
+      cursor: pointer;
+      background: var(--color-gray-0);
+    }
+
+    &--open {
+      background: var(--color-gray-0);
+      
+      .submenu {
+        display: block;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      position: unset;
+    }
+  }
+}
+
+.wallet {
+  &__title,
+  &__coins {
+    display: block;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &__title {
+    margin-bottom: 2px;
+  }
+
+  &__coins {
+    color: orangered;
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.submenu {
+  position: absolute;
+  display: none;
+  z-index: 100;
+  top: 100%;
+  right: -1px;
+  width: 128px;
+  list-style-type: none;
+  font-size: var(--font-size-small);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-3);
+
+  &__item {
+    &:hover {
+      background: var(--color-gray-0);
+    }
+    
+    a {
+      padding: var(--offset-small);
+      display: block;
+      text-decoration: none;
+      color: var(--color-black);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
 }
 
 .toggler {
   border: 0;
   outline: 0;
-  font-size: 24px;
-  align-self: center;
+  border-right: 1px solid var(--color-gray-3);
+  padding: var(--offset-medium);
   background: transparent;
 
   &:hover {
     cursor: pointer;
+    background: var(--color-gray-0);
   }
 }
