@@ -26,14 +26,6 @@ export default class Sidebar extends Component {
             to="/"
             icon="far fa-calendar-alt" 
             text="Events" />
-          <Menu.Item 
-            to="/bets"
-            icon="fas fa-dice" 
-            text="My Bets" />
-          <Menu.Item 
-            to="/manage"
-            icon="fas fa-user" 
-            text="My Events" />
         </Menu>
       </div>
     )
