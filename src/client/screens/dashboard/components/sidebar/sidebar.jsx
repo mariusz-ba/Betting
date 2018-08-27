@@ -35,17 +35,6 @@ export default class Sidebar extends Component {
             icon="fas fa-user" 
             text="My Events" />
         </Menu>
-        <span className={styles.divider}></span>
-        <Menu>
-          <Menu.Item 
-            to="/wallet"
-            icon="fas fa-wallet" 
-            text="Wallet" />
-          <Menu.Item 
-            to="/settings"
-            icon="fas fa-cogs" 
-            text="Settings" />
-        </Menu>
       </div>
     )
   }
