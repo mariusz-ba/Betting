@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions as UsersActions } from '@services/users';
 import { userSelector, walletSelector, userIdSelector } from './selectors';
+import styles from './wallet.scss';
 
 export class Wallet extends Component {
   componentDidMount() {
@@ -12,9 +13,20 @@ export class Wallet extends Component {
     const { amount, user } = this.props;
 
     return (
-      <div>
-        <h1>Wallet</h1>
-        <h3>Hi {user && user.username}, you currently have: {amount} coins.</h3>
+      <div className={styles.container}>
+        <div className={styles.wallet}>
+          <div className={styles.wallet__header}>
+            <h3 className={styles.heading}>Welcome to your wallet</h3>
+            <h4 className={styles.subheading}>You currently have</h4>
+          </div>
+          <div className={styles.wallet__amount}>$ {amount}</div>
+          <div className={styles.wallet__withdraw}>Withdraw</div>
+          <div className={styles.wallet__refill}>Refill</div>
+        </div>
+        <p className={styles.info}>
+          <strong>Info</strong>
+          Withdrawing and refilling your wallet is not supported yet. Currently this site is using its internal currency.
+        </p>
       </div>
     )
   }
