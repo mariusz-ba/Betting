@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 There are __two__ things You have to install in order to get this project running on your machine.
 1. Since project uses __NodeJS__ you must have it installed, otherwise you won't be able to start project.
 2. Betting app uses __MongoDB__ as a storage database. To get project running you must have it installed on your local machine or specify MongoDB server address inside *src/server/app.js* file.
-```
+```javascript
 mongoose.connect('mongodb://your-mongodb-server-address/your-collection-name', ...)
 ```
 
