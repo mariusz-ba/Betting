@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import styles from './dashboard.scss';
 
 import Events from './screens/events/events';
+import Event from './screens/event/event';
 import Bets from './screens/bets/bets';
 import Manage from './screens/manage/manage';
 import NewEvent from './screens/manage/screens/new-event/new-event';
@@ -30,6 +31,8 @@ export default class Dashboard extends Component {
           <div className={styles.content}>
             <Switch>
               <Route exact path="/" component={Events}/>
+              <Route path="/events/:id" component={Event}/>
+              <Route path="/events" component={Events}/>
               <Route path="/bets" component={Bets}/>
               <Route path="/manage/new" component={NewEvent}/>
               <Route path="/manage" component={Manage}/>

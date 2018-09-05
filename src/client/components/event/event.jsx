@@ -11,6 +11,8 @@ import Actions from './components/header/components/actions/actions';
 import Options from './components/options/options';
 import Option from './components/options/components/option/option';
 
+import { Link } from 'react-router-dom';
+
 export default class Event extends Component {
   static Actions = Actions;
 
@@ -66,7 +68,9 @@ export default class Event extends Component {
               minute: '2-digit'
             })}
           </Time>
-          <Title>{name}</Title>
+          <Title>
+            <Link to={`/events/${this.props.id}`}>{name}</Link>
+          </Title>
           { actions }
         </Header>
         <Options>
