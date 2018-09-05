@@ -4,7 +4,7 @@ export class Event {
   static counter = 0;
 
   constructor(data) {
-    const id = get(data, 'id', Event.counter++);
+    const id = get(data, 'id', `${Event.counter++}`);
     const name = get(data, 'name', 'unnamed');
     const organiser = get(data, 'organiser', '0');
     const createdAt = get(data, 'createdAt', Date.now());
@@ -47,7 +47,7 @@ export class Event {
       { id: '1', name: 'unnamed', pool: 0 }
     ]
 
-    if(!Array.isArray(value))
+    if(!Array.isArray(value) || value.length < 2)
       return defaults;
     
     return value.map(item => {
