@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions as EventsActions } from '@services/events';
 import { actions as BetsActions } from '@services/bets';
-import { actions as UsersActions } from '@services/users';
-import { eventsSelector, userSelector } from './selectors';
+import { eventsSelector } from './events.selectors';
 import styles from './events.scss';
 
 import Event from '@components/event/event';
-import BetModal from './components/bet-modal/bet-modal';
-
-const INITIAL_STATE = {
-  event: '',
-  option: null,
-  modal: false
-}
+import withBetModal from './components/bet-modal/withBetModal';
 
 export class Events extends Component {
-  state = INITIAL_STATE;
-  
   async componentDidMount() {
     await this.props.clearEvents();
     await this.props.clearBets();
@@ -25,22 +16,6 @@ export class Events extends Component {
     // Fetch users bets for given events to be able to display
     // if user has placed bet on this event
     this.props.fetchBets({ events: this.props.events.map(event => event.id) });
-  }
-  
-  modalDismiss = () => {
-    this.setState(INITIAL_STATE);
-  }
-
-  modalAccept = async (object) => {
-    this.setState(INITIAL_STATE);
-    await this.props.createBet(object);
-    this.props.fetchEvent(object.event);
-    this.props.updateWallet(this.props.user);
-    // If bet wasnt successfully created display modal error
-  }
-  
-  onClickOption = (event, option) => {
-    this.setState({ event, option, modal: true });
   }
 
   render() {
@@ -60,19 +35,12 @@ export class Events extends Component {
                   finished={event.result.finished}
                   winner={event.result.option}
                   options={event.options}
-                  onClick={this.onClickOption}
+                  onClick={this.props.showModal}
                   userPick={event.userPick} />
               </li>
             ))
           }
         </ul>
-        { this.state.modal &&
-          <BetModal
-            event={this.state.event}
-            option={this.state.option}
-            onAccept={this.modalAccept}
-            onDismiss={this.modalDismiss}/>
-        }
       </div>
     )
   }
@@ -80,7 +48,6 @@ export class Events extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: userSelector(state),
     events: eventsSelector(state)
   }
 }
@@ -88,12 +55,9 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps, 
   { 
-    updateWallet: UsersActions.updateWallet,
     clearEvents: EventsActions.clearEvents,
     clearBets: BetsActions.clearBets,
     fetchEvents: EventsActions.fetchEvents,
-    fetchEvent: EventsActions.fetchEvent,
-    fetchBets: BetsActions.fetchBets,
-    createBet: BetsActions.createBet
+    fetchBets: BetsActions.fetchBets
   }
-)(Events);
+)(withBetModal(Events));
