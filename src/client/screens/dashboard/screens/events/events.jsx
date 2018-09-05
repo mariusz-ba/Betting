@@ -6,7 +6,7 @@ import { eventsSelector } from './events.selectors';
 import styles from './events.scss';
 
 import Event from '@components/event/event';
-import withBetModal from './components/bet-modal/withBetModal';
+import { withBetModal } from '@components/bet-modal';
 
 export class Events extends Component {
   async componentDidMount() {
