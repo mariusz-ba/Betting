@@ -15,8 +15,8 @@ export default class BetModal extends Modal {
     event: PropTypes.string.isRequired
   }
 
-  changeAmount = amount => {
-    this.setState({ amount: amount });
+  changeAmount = e => {
+    this.setState({ amount: e.target.value });
   }
 
   onAccept = () => {
@@ -33,7 +33,13 @@ export default class BetModal extends Modal {
         <Modal.Header>You picked {this.props.option.name}</Modal.Header>
         <Modal.Content>
           <p className={styles.text}>How much money would You like to bet on {this.props.option.name}?</p>
-          <Modal.Input placeholder="Amount" value={this.state.amount} onChange={this.changeAmount}/>
+          <input 
+            class={styles.input} 
+            type="text" 
+            placeholder="Amount" 
+            value={this.state.amount} 
+            onChange={this.changeAmount}
+          />
         </Modal.Content>
         <Modal.Footer className={styles.actions}>
           <Button danger onClick={this.props.onDismiss}>Cancel</Button>
